@@ -9,7 +9,7 @@ import './TermsPage.css';
 function TermsPage() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  /* const { user } = useAuth(); */
 
   useEffect(() => {
     loadTerms();

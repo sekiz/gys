@@ -9,7 +9,7 @@ import './PracticeExamResultPage.css';
 function PracticeExamResultPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  /* const { user } = useAuth(); */
   const [result, setResult] = useState(null);
 
   useEffect(() => {

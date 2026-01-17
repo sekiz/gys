@@ -35,7 +35,7 @@ async function apiRequest(endpoint, options = {}) {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
     // Response'un content-type'ını kontrol et
-    const contentType = response.headers.get('content-type');
+    // Response'un content-type'ını kontrol et
 
     // Response body'yi parse et
     let data;

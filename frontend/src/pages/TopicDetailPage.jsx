@@ -29,39 +29,39 @@ function TopicDetailPage() {
   const trueFalseQuestions = questions.filter(q => q.type === 'TRUE_FALSE');
 
   useEffect(() => {
+    const loadTopicData = async () => {
+      try {
+        const [topicResponse, articlesResponse, summariesResponse, questionsResponse] = await Promise.all([
+          examAPI.getTopic(id),
+          examAPI.getArticles(id),
+          examAPI.getSummaries(id),
+          questionAPI.getQuestions({ topicId: id }),
+        ]);
+
+        if (topicResponse.success) {
+          setTopic(topicResponse.data.topic);
+        }
+
+        if (articlesResponse.success) {
+          setArticles(articlesResponse.data.articles);
+        }
+
+        if (summariesResponse.success) {
+          setSummaries(summariesResponse.data.summaries);
+        }
+
+        if (questionsResponse.success) {
+          setQuestions(questionsResponse.data.questions);
+        }
+      } catch (error) {
+        console.error('Veri yükleme hatası:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     loadTopicData();
   }, [id]);
-
-  const loadTopicData = async () => {
-    try {
-      const [topicResponse, articlesResponse, summariesResponse, questionsResponse] = await Promise.all([
-        examAPI.getTopic(id),
-        examAPI.getArticles(id),
-        examAPI.getSummaries(id),
-        questionAPI.getQuestions({ topicId: id }),
-      ]);
-
-      if (topicResponse.success) {
-        setTopic(topicResponse.data.topic);
-      }
-
-      if (articlesResponse.success) {
-        setArticles(articlesResponse.data.articles);
-      }
-
-      if (summariesResponse.success) {
-        setSummaries(summariesResponse.data.summaries);
-      }
-
-      if (questionsResponse.success) {
-        setQuestions(questionsResponse.data.questions);
-      }
-    } catch (error) {
-      console.error('Veri yükleme hatası:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleAnswer = async (questionId, isCorrect, userAnswer) => {
     try {
@@ -282,13 +282,11 @@ function QuestionCard({ question, index, onAnswer }) {
           {question.options.map((option, idx) => (
             <div
               key={idx}
-              className={`option-item ${
-                answered && idx === question.correctAnswer ? 'correct' : ''
-              } ${
-                answered && selectedAnswer === idx && idx !== question.correctAnswer
+              className={`option-item ${answered && idx === question.correctAnswer ? 'correct' : ''
+                } ${answered && selectedAnswer === idx && idx !== question.correctAnswer
                   ? 'incorrect'
                   : ''
-              } ${selectedAnswer === idx ? 'selected' : ''}`}
+                } ${selectedAnswer === idx ? 'selected' : ''}`}
               onClick={() => handleOptionClick(idx)}
             >
               <span className="option-letter">{String.fromCharCode(65 + idx)}</span>

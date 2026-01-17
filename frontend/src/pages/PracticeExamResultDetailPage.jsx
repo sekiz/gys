@@ -18,32 +18,31 @@ function decodeHtmlEntities(text) {
 function PracticeExamResultDetailPage() {
   const navigate = useNavigate();
   const { resultId } = useParams();
-  const { user } = useAuth();
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadResultDetail();
-  }, [resultId]);
-
-  const loadResultDetail = async () => {
-    try {
-      setLoading(true);
-      const response = await practiceExamAPI.getPracticeExamResultDetail(resultId);
-      if (response.success) {
-        setResult(response.data.result);
-      } else {
+    const loadResultDetail = async () => {
+      try {
+        setLoading(true);
+        const response = await practiceExamAPI.getPracticeExamResultDetail(resultId);
+        if (response.success) {
+          setResult(response.data.result);
+        } else {
+          alert('Sonuç yüklenirken bir hata oluştu.');
+          navigate('/deneme-sinavlari');
+        }
+      } catch (error) {
+        console.error('Sonuç detay yükleme hatası:', error);
         alert('Sonuç yüklenirken bir hata oluştu.');
         navigate('/deneme-sinavlari');
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error('Sonuç detay yükleme hatası:', error);
-      alert('Sonuç yüklenirken bir hata oluştu.');
-      navigate('/deneme-sinavlari');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    loadResultDetail();
+  }, [resultId, navigate]);
 
   if (loading) {
     return (

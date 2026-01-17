@@ -12,7 +12,7 @@ function PackagePage() {
   const [myPackages, setMyPackages] = useState([]);
   const [activePackage, setActivePackage] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [requesting, setRequesting] = useState(false);
+  const [requesting] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const [selectedExam, setSelectedExam] = useState(null); // Seçilen paket (tek seçim)
   const { user } = useAuth();
@@ -27,9 +27,9 @@ function PackagePage() {
     try {
       setLoading(true);
       setMessage({ type: '', text: '' });
-      
+
       console.log('📦 Paket verileri yükleniyor...');
-      
+
       // Public exams kullan (tüm aktif sınavları göster)
       const [examsResponse, packagesResponse, activePackageResponse] = await Promise.all([
         examAPI.getPublicExams().catch((err) => {
@@ -37,10 +37,10 @@ function PackagePage() {
           const errorMessage = err.message || 'Bilinmeyen hata';
           // "Failed to fetch" hatası backend'e bağlanılamadığını gösterir
           if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError')) {
-            return { 
-              success: false, 
-              data: { exams: [] }, 
-              error: 'Backend sunucusuna bağlanılamıyor. Lütfen backend\'in çalıştığından emin olun (http://localhost:5000)' 
+            return {
+              success: false,
+              data: { exams: [] },
+              error: 'Backend sunucusuna bağlanılamıyor. Lütfen backend\'in çalıştığından emin olun (http://localhost:5000)'
             };
           }
           return { success: false, data: { exams: [] }, error: errorMessage };
@@ -71,9 +71,9 @@ function PackagePage() {
       } else {
         console.warn('⚠️ Sınavlar yüklenemedi:', examsResponse.error || examsResponse.message);
         const errorText = examsResponse.error || examsResponse.message || 'Sınavlar yüklenirken bir hata oluştu.';
-        setMessage({ 
-          type: 'error', 
-          text: errorText 
+        setMessage({
+          type: 'error',
+          text: errorText
         });
         // Backend bağlantı hatası varsa, kullanıcıya daha açıklayıcı mesaj göster
         if (errorText.includes('Backend sunucusuna bağlanılamıyor')) {
@@ -110,26 +110,26 @@ function PackagePage() {
       setMessage({ type: 'error', text: 'Lütfen bir paket seçiniz.' });
       return;
     }
-    
+
     const selectedExamData = exams.find(e => e.id === selectedExam);
     if (!selectedExamData) {
       setMessage({ type: 'error', text: 'Seçilen paket bulunamadı.' });
       return;
     }
-    
+
     // Ödeme bildirim sayfasına git
-    navigate('/paketler/odeme', { 
-      state: { 
+    navigate('/paketler/odeme', {
+      state: {
         selectedExams: [selectedExamData],
         totalPrice: parseFloat(selectedExamData.price) || 0
-      } 
+      }
     });
   };
 
   const getPackageStatus = (examId) => {
     const userPackage = myPackages.find(pkg => pkg.examId === examId);
     if (!userPackage) return null;
-    
+
     return {
       status: userPackage.status,
       purchasedAt: userPackage.purchasedAt,
@@ -242,8 +242,8 @@ function PackagePage() {
             <div className="no-packages">
               <p>Henüz paket bulunmamaktadır. Admin panelinden sınav ekleyebilirsiniz.</p>
               {user?.role === 'ADMIN' && (
-                <button 
-                  className="btn btn-primary" 
+                <button
+                  className="btn btn-primary"
                   onClick={() => navigate('/yonetim/sinavlar')}
                   style={{ marginTop: '1rem' }}
                 >
@@ -292,7 +292,7 @@ function PackagePage() {
                       <div className="package-price">
                         <span className="price-label">Fiyat:</span>
                         <span className="price-value">
-                          {exam.price && parseFloat(exam.price) > 0 
+                          {exam.price && parseFloat(exam.price) > 0
                             ? `${parseFloat(exam.price).toFixed(2)} ₺`
                             : 'Fiyat belirtilmemiş'}
                         </span>

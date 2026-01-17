@@ -18,7 +18,7 @@ function decodeHtmlEntities(text) {
 function PracticeExamPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  /* const { user } = useAuth(); */
   const [practiceExam, setPracticeExam] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -36,6 +36,23 @@ function PracticeExamPage() {
   }, []);
 
   useEffect(() => {
+    const loadPracticeExam = async () => {
+      try {
+        setLoading(true);
+        const response = await practiceExamAPI.getPracticeExam(id);
+        if (response.success) {
+          const exam = response.data.practiceExam;
+          setPracticeExam(exam);
+          setQuestions(exam.questions.map((tq) => tq.question));
+          setTimeRemaining(exam.duration * 60); // dakikayı saniyeye çevir
+        }
+      } catch (error) {
+        console.error('Deneme sınavı yüklenirken hata:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (hasActivePackage) {
       loadPracticeExam();
     }
@@ -76,22 +93,7 @@ function PracticeExamPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examStarted, timeRemaining]);
 
-  const loadPracticeExam = async () => {
-    try {
-      setLoading(true);
-      const response = await practiceExamAPI.getPracticeExam(id);
-      if (response.success) {
-        const exam = response.data.practiceExam;
-        setPracticeExam(exam);
-        setQuestions(exam.questions.map((tq) => tq.question));
-        setTimeRemaining(exam.duration * 60); // dakikayı saniyeye çevir
-      }
-    } catch (error) {
-      console.error('Deneme sınavı yüklenirken hata:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   const handleStartExam = () => {
     setExamStarted(true);
@@ -103,7 +105,7 @@ function PracticeExamPage() {
       ...prev,
       [questionId]: answer,
     }));
-    
+
     // Mobilde şık seçildiğinde navigation butonlarına scroll yap
     if (window.innerWidth <= 768) {
       setTimeout(() => {
@@ -204,8 +206,8 @@ function PracticeExamPage() {
             <div className="warning-icon">⚠️</div>
             <h2>Paket Gerekli</h2>
             <p>İçeriğe erişmek için paket satın almalısınız.</p>
-            <button 
-              className="btn btn-primary" 
+            <button
+              className="btn btn-primary"
               onClick={() => navigate('/paketler')}
             >
               Paketleri Görüntüle →
@@ -312,9 +314,8 @@ function PracticeExamPage() {
               {currentQuestion.options.map((option, index) => (
                 <div
                   key={index}
-                  className={`option-item ${
-                    answers[currentQuestion.id] === index ? 'selected' : ''
-                  }`}
+                  className={`option-item ${answers[currentQuestion.id] === index ? 'selected' : ''
+                    }`}
                   onClick={() => handleAnswerChange(currentQuestion.id, index)}
                 >
                   <div className="option-letter">
@@ -360,9 +361,8 @@ function PracticeExamPage() {
               {questions.map((q, index) => (
                 <button
                   key={q.id}
-                  className={`question-number-btn ${
-                    index === currentQuestionIndex ? 'active' : ''
-                  } ${answers[q.id] !== undefined ? 'answered' : ''}`}
+                  className={`question-number-btn ${index === currentQuestionIndex ? 'active' : ''
+                    } ${answers[q.id] !== undefined ? 'answered' : ''}`}
                   onClick={() => handleQuestionClick(index)}
                 >
                   {index + 1}

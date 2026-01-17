@@ -12,7 +12,7 @@ function PracticeExamListPage() {
   const [loading, setLoading] = useState(true);
   const [hasActivePackage, setHasActivePackage] = useState(false);
   const [checkingPackage, setCheckingPackage] = useState(true);
-  const { user } = useAuth();
+  const { } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,8 +82,8 @@ function PracticeExamListPage() {
             <div className="warning-icon">⚠️</div>
             <h2>Paket Gerekli</h2>
             <p>İçeriğe erişmek için paket satın almalısınız.</p>
-            <button 
-              className="btn btn-primary" 
+            <button
+              className="btn btn-primary"
               onClick={() => navigate('/paketler')}
             >
               Paketleri Görüntüle →
