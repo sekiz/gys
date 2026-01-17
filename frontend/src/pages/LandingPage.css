@@ -1,0 +1,380 @@
+/* Landing Page Styles */
+.landing-page {
+  width: 100%;
+}
+
+.top-navbar {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 32px;
+}
+
+.logo-text h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logo-text p {
+  font-size: 11px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.account-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.account-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* Update Hero Section */
+.hero-section {
+  background-color: #f0fdf4;
+  /* Very light mint/white background similar to reference's white side */
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  min-height: 600px;
+}
+
+.hero-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 100%;
+}
+
+.hero-text-content {
+  padding: 4rem 2rem 4rem 0;
+  z-index: 10;
+}
+
+.hero-text-content h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.hero-text-content p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  /* Occupy slightly more than half */
+  height: 100%;
+  /* The slanted effect */
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  background-color: #000;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Button override for Hero */
+.btn-hero-primary {
+  background-color: #f97316;
+  /* Orange color from reference */
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-hero-primary:hover {
+  background-color: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.4);
+}
+
+/* Responsive adjustments for Hero */
+@media (max-width: 1024px) {
+  .hero-text-content h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    padding-top: 2rem;
+  }
+
+  .hero-text-content {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  .hero-text-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-image-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    clip-path: none;
+    /* Remove slant on mobile for better stacking */
+    margin-top: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+}
+
+
+.features-section h2 {
+  text-align: center;
+  font-size: 36px;
+  color: #1e3c72;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  background: #f8f9fa;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1e3c72;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Exams Section */
+.exams-section {
+  padding: 60px 20px;
+  background: #f8f9fa;
+}
+
+.exams-section h2 {
+  text-align: center;
+  font-size: 36px;
+  color: #1e3c72;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.exams-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.exam-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.exam-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.exam-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exam-image-placeholder {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-size: 64px;
+}
+
+.exam-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-content h3 {
+  font-size: 20px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.exam-content p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.exam-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #999;
+}
+
+.btn-exam {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: auto;
+}
+
+.btn-exam:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .exams-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h2 {
+    font-size: 32px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 300px;
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+
+  .features-section h2,
+  .exams-section h2 {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,223 @@
+/* Hero Slider Styles */
+.hero-slider-container {
+    width: 100%;
+    height: 650px;
+    /* Tall, cinematic height */
+    position: relative;
+    background-color: #000;
+}
+
+.hero-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Background Image with Zoom Effect */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    /* Subtle zoom animation when active */
+    transition: transform 8s ease;
+}
+
+.swiper-slide-active .slide-bg {
+    transform: scale(1.1);
+}
+
+/* Gradient Overlay - Improves text readability */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.6) 50%,
+            rgba(0, 0, 0, 0.1) 100%);
+    z-index: 10;
+}
+
+/* Content Positioning */
+.slide-content-wrapper {
+    position: relative;
+    z-index: 20;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.slide-content {
+    max-width: 700px;
+    color: white;
+    padding-top: 60px;
+    /* Offset for sticky header */
+}
+
+/* Typography Animations */
+.slide-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slide-title-line {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.swiper-slide-active .slide-title-line {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-subtitle {
+    font-size: 1.25rem;
+    color: #e5e7eb;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
+    /* Delay */
+}
+
+.swiper-slide-active .slide-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* CTA Button */
+.slide-btn {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        background 0.3s,
+        transform 0.3s,
+        box-shadow 0.3s,
+        opacity 0.8s ease-out 0.6s;
+    /* Longer delay */
+}
+
+.swiper-slide-active .slide-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-btn:hover {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+    transform: translateY(-3px) !important;
+    /* Override slide-in translate */
+    box-shadow: 0 8px 25px rgba(249, 115, 22, 0.6);
+}
+
+/* Custom Pagination Bullets */
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    transition: all 0.3s;
+    margin: 0 8px !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #f97316;
+    width: 30px;
+    border-radius: 6px;
+}
+
+/* Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transition: background 0.3s;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-slider-container {
+        height: 550px;
+    }
+
+    .slide-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-slider-container {
+        height: 500px;
+    }
+
+    .slide-overlay {
+        background: rgba(0, 0, 0, 0.6);
+        /* Flat overlay on mobile for better text contrast everywhere */
+    }
+
+    .slide-title {
+        font-size: 2rem;
+    }
+
+    .slide-subtitle {
+        font-size: 1rem;
+    }
+
+    .slide-content {
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 0;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+        /* Hide arrows on mobile */
+    }
+}

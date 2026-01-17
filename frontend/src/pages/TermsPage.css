@@ -1,0 +1,52 @@
+/* Terms Page Styles */
+.terms-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.content-wrapper {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.content-wrapper h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin: 0 0 30px 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.content-body {
+  line-height: 1.8;
+  color: #333;
+  font-size: 16px;
+}
+
+.content-body p {
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.content-body p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 25px;
+    margin: 20px auto;
+  }
+
+  .content-wrapper h1 {
+    font-size: 24px;
+  }
+
+  .content-body {
+    font-size: 14px;
+  }
+}

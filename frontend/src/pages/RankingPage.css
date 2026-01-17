@@ -1,0 +1,224 @@
+/* Ranking Page Styles */
+.ranking-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 20px 0;
+}
+
+.ranking-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ranking-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+}
+
+.ranking-description {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Kullanıcının kendi sıralaması */
+.user-ranking-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.user-ranking-card h2 {
+  margin: 0 0 20px 0;
+  font-size: 20px;
+}
+
+.user-ranking-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rank-badge-large {
+  font-size: 48px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: 12px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.user-ranking-details {
+  flex: 1;
+}
+
+.user-ranking-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.user-ranking-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.user-ranking-stats span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Sıralama Tablosu */
+.ranking-table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ranking-table thead {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+}
+
+.ranking-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ranking-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s;
+}
+
+.ranking-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.ranking-table tbody tr.current-user {
+  background-color: #e8f0ff;
+  font-weight: 600;
+}
+
+.ranking-table td {
+  padding: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.rank-cell {
+  text-align: center;
+  width: 80px;
+}
+
+.rank-badge {
+  font-size: 24px;
+  display: inline-block;
+}
+
+.rank-number {
+  font-weight: 600;
+  color: #1e3c72;
+}
+
+.name-cell {
+  font-weight: 500;
+  min-width: 150px;
+}
+
+.exam-cell {
+  color: #666;
+  min-width: 120px;
+}
+
+.stat-cell {
+  text-align: center;
+  width: 80px;
+}
+
+.stat-cell.correct-stat {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.stat-cell.wrong-stat {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.score-cell {
+  text-align: center;
+  width: 100px;
+}
+
+.score-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3c72;
+  display: block;
+}
+
+.score-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.city-cell {
+  color: #666;
+  min-width: 100px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ranking-table-container {
+    overflow-x: auto;
+  }
+
+  .ranking-table {
+    min-width: 800px;
+  }
+
+  .user-ranking-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-ranking-stats {
+    justify-content: center;
+  }
+}

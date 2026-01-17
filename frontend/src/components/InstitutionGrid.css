@@ -1,0 +1,130 @@
+.institution-grid-container {
+    padding: 4rem 1rem 4rem 1rem;
+    max-width: 100%;
+    /* Changed from fixed 1280 to utilize full width background */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.institution-grid-inner {
+    max-width: 1150px;
+    /* Matching the landing page max-w-6xl somewhat (6xl is ~1152px) */
+    width: 100%;
+}
+
+.institution-grid-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.institution-grid-header h2 {
+    font-size: 2.25rem;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.institution-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.institution-card {
+    /* Background color will be set inline via JS */
+    border-radius: 4px;
+    /* Slightly sharper corners like reference */
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* No border */
+}
+
+.institution-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    /* Very subtle shadow */
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: #ffffff;
+    /* White background for icon box */
+    border-radius: 4px;
+    /* Consistent radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-box {
+    flex: 1;
+}
+
+.info-box h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+.info-box span {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.browse-all-container {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.browse-all-link {
+    color: #d946ef;
+    /* Matches a vibrant GYS theme typically or user preference */
+    color: #f97316;
+    /* Orange to match main button */
+    font-weight: 600;
+    margin-left: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.browse-all-link:hover {
+    color: #ea580c;
+    text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+    .institution-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .institution-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .institution-grid-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .institution-grid {
+        grid-template-columns: 1fr;
+    }
+}

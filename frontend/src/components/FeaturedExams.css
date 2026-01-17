@@ -1,0 +1,203 @@
+/* Featured Exams Styles */
+.featured-exams-container {
+    padding: 3rem 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.featured-header {
+    margin-bottom: 2rem;
+}
+
+.featured-header h2 {
+    font-size: 2rem;
+    color: #111827;
+    font-weight: 800;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 Columns */
+    gap: 2rem;
+}
+
+.featured-card {
+    background: #f9fafb;
+    /* Light gray background for the card */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.featured-card:hover {
+    background: #fff;
+    /* White on hover */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    transform: translateY(-2px);
+    border-color: #f3f4f6;
+}
+
+.featured-image-wrapper {
+    width: 180px;
+    /* Fixed width for image */
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #e5e7eb;
+    display: flex;
+    /* Centering for mock */
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-mock-image {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    transition: transform 0.5s ease;
+}
+
+.featured-card:hover .featured-image-wrapper img,
+.featured-card:hover .featured-mock-image {
+    transform: scale(1.05);
+    /* Zoom effect */
+}
+
+.featured-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.featured-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.featured-category {
+    color: #10b981;
+    /* Green text standard for 'REHBER VE TEST' or similar */
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.featured-price {
+    font-weight: 800;
+    color: #111827;
+    font-size: 1rem;
+}
+
+.featured-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-institution-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.inst-badge {
+    width: 20px;
+    height: 20px;
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.featured-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Spread evenly */
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.rating-star {
+    color: #f59e0b;
+}
+
+.students-icon,
+.level-icon,
+.clock-icon {
+    color: #9ca3af;
+}
+
+/* You can refine colors if needed */
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .featured-card {
+        flex-direction: row;
+        /* Keep horizontal on mobile if possible, or stack */
+    }
+
+    .featured-image-wrapper {
+        width: 120px;
+        /* Smaller image on mobile */
+    }
+
+    .featured-content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-card {
+        flex-direction: column;
+    }
+
+    .featured-image-wrapper {
+        width: 100%;
+        height: 160px;
+    }
+}

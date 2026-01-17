@@ -1,0 +1,409 @@
+/* Practice Exam Result Detail Page Styles */
+.practice-exam-result-detail-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 20px 0;
+}
+
+.result-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.result-summary {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.summary-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.summary-header h1 {
+  font-size: 32px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+}
+
+.exam-title {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
+.score-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+  border: 3px solid;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.score-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.score-value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.score-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.score-label {
+  font-weight: 600;
+  color: #666;
+  min-width: 80px;
+}
+
+.score-number {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.score-number.correct {
+  color: #28a745;
+}
+
+.score-number.wrong {
+  color: #dc3545;
+}
+
+.result-info {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  flex: 1;
+  max-width: 300px;
+}
+
+.info-icon {
+  font-size: 32px;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Sorular İnceleme Bölümü */
+.questions-review {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.questions-review h2 {
+  font-size: 24px;
+  color: #1e3c72;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.question-review-card {
+  padding: 25px;
+  border-radius: 10px;
+  border-left: 5px solid #e0e0e0;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.question-review-card.correct {
+  border-left-color: #28a745;
+  background: #f0f9f4;
+}
+
+.question-review-card.incorrect {
+  border-left-color: #dc3545;
+  background: #fff5f5;
+}
+
+.question-review-card.unanswered {
+  border-left-color: #ffc107;
+  background: #fffbf0;
+}
+
+.question-review-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.question-number {
+  background: #1e3c72;
+  color: white;
+  padding: 6px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.question-topic {
+  background: #e8f0ff;
+  color: #4a6fa5;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.answer-status {
+  margin-left: auto;
+  padding: 6px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.answer-status.correct {
+  background: #d4edda;
+  color: #155724;
+}
+
+.answer-status.incorrect {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.answer-status.unanswered {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.question-review-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.question-review-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.option-review {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.option-review.correct-answer {
+  border-color: #28a745;
+  background: #d4edda;
+}
+
+.option-review.wrong-answer {
+  border-color: #dc3545;
+  background: #f8d7da;
+}
+
+.option-review.user-correct {
+  border-color: #28a745;
+  background: #c3e6cb;
+  font-weight: 600;
+}
+
+.option-letter {
+  font-weight: 700;
+  font-size: 16px;
+  color: #1e3c72;
+  min-width: 25px;
+}
+
+.option-text {
+  flex: 1;
+  font-size: 15px;
+  color: #333;
+}
+
+.correct-badge,
+.wrong-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.correct-badge {
+  background: #28a745;
+  color: white;
+}
+
+.wrong-badge {
+  background: #dc3545;
+  color: white;
+}
+
+.question-explanation {
+  margin-top: 15px;
+  padding: 15px;
+  background: #e8f0ff;
+  border-radius: 8px;
+  border-left: 4px solid #1e3c72;
+}
+
+.question-explanation strong {
+  color: #1e3c72;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.question-explanation p {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+}
+
+.result-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #1e3c72;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2d4a8a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(30, 60, 114, 0.3);
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+.error-message {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #dc3545;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .score-card {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .result-info {
+    flex-direction: column;
+  }
+
+  .info-card {
+    max-width: 100%;
+  }
+
+  .question-review-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .answer-status {
+    margin-left: 0;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

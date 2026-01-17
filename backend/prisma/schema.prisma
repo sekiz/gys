@@ -1,0 +1,349 @@
+// Prisma Schema - UzmanGYS Platform
+// PostgreSQL veritabanı şeması
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Seed script
+// npm run prisma:seed
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Kullanıcı Modeli
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  password     String
+  name         String
+  city         String?   // Şehir (opsiyonel)
+  institution  String?   // Kurum (opsiyonel)
+  role         UserRole  @default(STUDENT)
+  refreshToken String?   // Refresh token (logout için blacklist)
+  resetToken   String?   // Şifre sıfırlama token'ı
+  resetTokenExpiry DateTime? // Token geçerlilik süresi
+  lastLogin    DateTime? // Son giriş tarihi
+  loginAttempts Int      @default(0) // Başarısız giriş denemeleri
+  lockedUntil  DateTime? // Hesap kilitlenme süresi
+  isActive     Boolean   @default(true) // Hesap aktif/pasif
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // İlişkiler
+  examResults    ExamResult[]
+  questionReports QuestionReport[]
+  userPackages   UserPackage[] // Kullanıcının satın aldığı paketler
+  timedTestResults TimedTestResult[] // Süreli test sonuçları
+  
+  @@map("users")
+}
+
+// Kullanıcı Rolleri
+enum UserRole {
+  STUDENT
+  ADMIN
+  INSTRUCTOR
+}
+
+// Sınav Modeli
+model Exam {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  code        String   @unique // örn: "adalet-gys"
+  imageUrl    String?  // Sınav görseli URL'si
+  price       Decimal? @db.Decimal(10, 2) // Paket fiyatı (TL)
+  
+  // Marketing / Display Fields
+  institution   String?  // Kurum Adı (örn: "Sağlık Bakanlığı")
+  category      String?  // Kategori (örn: "Sağlık", "Eğitim")
+  rating        Decimal  @default(4.8) @db.Decimal(2, 1)
+  ratingCount   Int      @default(120) // Değerlendirme sayısı
+  enrolledCount Int      @default(0)   // Kayıtlı öğrenci sayısı
+  questionCount Int      @default(0)   // Pazarlama için soru sayısı
+
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // İlişkiler
+  topics      Topic[]
+  examResults ExamResult[]
+  userPackages UserPackage[] // Bu paketi satın alan kullanıcılar
+  timedTests  TimedTest[] // Süreli testler
+  
+  @@map("exams")
+}
+
+// Konu Modeli
+model Topic {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  examId      String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // İlişkiler
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  questions   Question[]
+  articles    Article[]
+  summaries   Summary[]
+  timedTests  TimedTest[] // Süreli testler
+  
+  @@map("topics")
+}
+
+// Soru Modeli
+model Question {
+  id          String       @id @default(uuid())
+  topicId    String
+  question    String
+  type        QuestionType @default(MULTIPLE_CHOICE)
+  options     String[]     // Çoktan seçmeli seçenekler
+  correctAnswer Int        // Doğru cevap indeksi (0-3)
+  explanation String?
+  difficulty  Difficulty   @default(MEDIUM)
+  isPreviousExam Boolean  @default(false) // Çıkmış soru mu?
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  
+  // İlişkiler
+  topic       Topic        @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  examResults ExamResult[]
+  reports     QuestionReport[]
+  timedTestQuestions TimedTestQuestion[] // Süreli testlerde kullanılan sorular
+  
+  @@map("questions")
+}
+
+// Soru Tipi
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+}
+
+// Zorluk Seviyesi
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+// Makale Modeli (Konu maddeleri)
+model Article {
+  id        String   @id @default(uuid())
+  topicId  String
+  title     String
+  content   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // İlişkiler
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  
+  @@map("articles")
+}
+
+// Konu Özeti Modeli
+model Summary {
+  id        String   @id @default(uuid())
+  topicId  String
+  title     String
+  content   String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // İlişkiler
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  
+  @@map("summaries")
+}
+
+// Sınav Sonucu Modeli
+model ExamResult {
+  id          String   @id @default(uuid())
+  userId     String
+  examId     String?
+  topicId    String?
+  questionId String?
+  isCorrect  Boolean
+  userAnswer Int?      // Kullanıcının verdiği cevap
+  timeSpent  Int?      // Saniye cinsinden
+  createdAt  DateTime  @default(now())
+  
+  // İlişkiler
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam       Exam?     @relation(fields: [examId], references: [id], onDelete: SetNull)
+  question   Question? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+  
+  @@map("exam_results")
+}
+
+// Soru Raporu Modeli (Hatalı soru bildirimi)
+model QuestionReport {
+  id          String   @id @default(uuid())
+  questionId String
+  userId     String
+  reason     String
+  description String?
+  status      ReportStatus @default(PENDING)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  
+  // İlişkiler
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("question_reports")
+}
+
+// Rapor Durumu
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  RESOLVED
+  REJECTED
+}
+
+// Kullanıcı Paket Modeli (Kullanıcı-Paket İlişkisi)
+model UserPackage {
+  id            String          @id @default(uuid())
+  userId        String          // Kullanıcı ID'si
+  examId        String          // Satın alınan paket (Exam ID'si)
+  status        PackageStatus   @default(PENDING) // Paket durumu
+  purchasedAt   DateTime        @default(now()) // Satın alma tarihi
+  activatedAt  DateTime?       // Admin tarafından aktif edilme tarihi
+  expiresAt     DateTime?       // Paket bitiş tarihi (opsiyonel, null ise süresiz)
+  notes         String?         // Admin notları
+  // Ödeme bilgileri
+  paymentDate   DateTime?       // Ödeme tarihi
+  paymentAmount Decimal?        @db.Decimal(10, 2) // Ödeme tutarı
+  paymentMethod String?         // Ödeme yöntemi (BANK_TRANSFER, CREDIT_CARD, OTHER)
+  transactionId String?         // İşlem no / Referans no
+  paymentNotes  String?         // Ödeme notları (kullanıcı tarafından girilen)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  
+  // İlişkiler
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam        Exam            @relation(fields: [examId], references: [id], onDelete: Cascade)
+  
+  // Bir kullanıcı aynı paketi birden fazla kez satın alabilir (geçmiş kayıtlar için)
+  @@unique([userId, examId, purchasedAt])
+  @@map("user_packages")
+}
+
+// Paket Durumu
+enum PackageStatus {
+  PENDING   // Admin onayı bekliyor
+  ACTIVE    // Aktif paket
+  EXPIRED   // Süresi dolmuş
+  CANCELLED // İptal edilmiş
+}
+
+// Süreli Test Modeli
+model TimedTest {
+  id          String   @id @default(uuid())
+  examId      String   // Hangi sınava ait
+  topicId     String?  // Hangi konuya ait (opsiyonel)
+  title       String   // Test başlığı
+  description String?  // Test açıklaması
+  duration    Int      // Süre (dakika cinsinden)
+  questionCount Int    // Soru sayısı
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // İlişkiler
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  topic       Topic?   @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  questions   TimedTestQuestion[] // Test soruları
+  results     TimedTestResult[] // Test sonuçları
+  
+  @@map("timed_tests")
+}
+
+// Süreli Test - Soru İlişkisi (Many-to-Many)
+model TimedTestQuestion {
+  id          String   @id @default(uuid())
+  testId      String
+  questionId  String
+  order       Int      @default(0) // Soru sırası
+  createdAt   DateTime @default(now())
+  
+  // İlişkiler
+  test        TimedTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  question    Question  @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  
+  @@unique([testId, questionId])
+  @@index([testId, order])
+  @@map("timed_test_questions")
+}
+
+// Süreli Test Sonucu
+model TimedTestResult {
+  id          String   @id @default(uuid())
+  testId      String
+  userId      String
+  score       Int      // Doğru sayısı
+  total       Int      // Toplam soru sayısı
+  percentage  Decimal  @db.Decimal(5, 2) // Yüzde (örn: 85.50)
+  timeSpent   Int      // Kullanılan süre (saniye)
+  answers     Json     // Kullanıcının cevapları { questionId: answer }
+  startedAt   DateTime // Test başlangıç zamanı
+  completedAt DateTime // Test bitiş zamanı
+  createdAt   DateTime @default(now())
+  
+  // İlişkiler
+  test        TimedTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId, testId])
+  @@index([testId])
+  @@map("timed_test_results")
+}
+
+// Footer Modeli (Admin tarafından düzenlenebilir footer içeriği)
+model Footer {
+  id                      String   @id @default(uuid())
+  description             String?  // Platform açıklaması
+  email                   String?  // İletişim e-postası
+  phone                   String?  // İletişim telefonu
+  address                 String?  // İletişim adresi
+  twitterUrl              String?  // Twitter/X sosyal medya linki
+  facebookUrl             String?  // Facebook sosyal medya linki
+  instagramUrl            String?  // Instagram sosyal medya linki
+  privacyPolicyContent    String?  @db.Text // Gizlilik politikası içeriği
+  termsContent            String?  @db.Text // Kullanım koşulları içeriği
+  mesafeliSatisSozlesmesi String?  @db.Text // Mesafeli satış sözleşmesi içeriği
+  kisiselVerilerIsleme   String?  @db.Text // Kişisel verilerin kullanılması ve işlenmesi içeriği
+  uyelikSozlesmesi       String?  @db.Text // Üyelik sözleşmesi içeriği
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  
+  @@map("footer")
+}
+
+// Hero Slayt Modeli (Anasayfa slider yönetimi)
+model HeroSlide {
+  id          String   @id @default(uuid())
+  title       String
+  subtitle    String?
+  imageUrl    String
+  buttonText  String   @default("İncele")
+  link        String   @default("/")
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("hero_slides")
+}
