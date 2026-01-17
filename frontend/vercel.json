@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "https://gys-bacckend-git-main-sekizs-projects.vercel.app/api/$1"
+        }
+    ]
+}
