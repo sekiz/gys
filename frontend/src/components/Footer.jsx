@@ -85,10 +85,6 @@ function Footer() {
                   <p>Kayıtlı Aday</p>
                 </div>
                 <div className="stat-item">
-                  <h3>%98</h3>
-                  <p>Memnuniyet</p>
-                </div>
-                <div className="stat-item">
                   <h3>%95</h3>
                   <p>Başarı Oranı</p>
                 </div>

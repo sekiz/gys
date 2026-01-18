@@ -18,26 +18,28 @@
 .footer-stats-section {
   padding: 80px 0;
   background-color: #1a1d21;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stats-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 60px;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .stats-cta {
   flex: 1;
+  min-width: 300px;
   max-width: 600px;
 }
 
 .stats-cta h2 {
   font-size: 36px;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 30px;
+  line-height: 1.25;
+  margin: 0 0 32px 0;
   color: #ffffff;
 }
 
@@ -47,14 +49,15 @@
 }
 
 .btn-stats {
-  padding: 14px 28px;
-  font-size: 16px;
+  padding: 12px 24px;
+  font-size: 15px;
   font-weight: 600;
   border-radius: 4px;
-  /* Image shows sharp/small radius */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   border: none;
+  min-width: 140px;
+  text-align: center;
 }
 
 .btn-orange {
@@ -64,36 +67,49 @@
 
 .btn-orange:hover {
   background-color: #f4511e;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .btn-dark-outline {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
 }
 
 .btn-dark-outline:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
 .stats-grid {
   display: flex;
-  gap: 40px;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }
 
 .stat-item h3 {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 700;
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
   color: #ffffff;
+  line-height: 1;
 }
 
 .stat-item p {
   font-size: 14px;
-  color: #a0a0a0;
+  color: #9ca3af;
   margin: 0;
+  font-weight: 400;
 }
 
 /* =========================================
