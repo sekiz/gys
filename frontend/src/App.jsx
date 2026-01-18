@@ -35,6 +35,10 @@ import PracticeExamResultDetailPage from './pages/PracticeExamResultDetailPage';
 import AdminPracticeExamPage from './pages/AdminPracticeExamPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminLayout from './layouts/AdminLayout';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import CareerPage from './pages/CareerPage';
+import FaqPage from './pages/FaqPage';
 import './App.css';
 
 // Protected Route Component
@@ -229,6 +233,10 @@ function AppRoutes() {
       <Route path="/mesafeli-satis-sozlesmesi" element={<MesafeliSatisPage />} />
       <Route path="/kisisel-veriler" element={<KisiselVerilerPage />} />
       <Route path="/uyelik-sozlesmesi" element={<UyelikSozlesmesiPage />} />
+      <Route path="/hakkimizda" element={<AboutPage />} />
+      <Route path="/iletisim" element={<ContactPage />} />
+      <Route path="/kariyer" element={<CareerPage />} />
+      <Route path="/sss" element={<FaqPage />} />
     </Routes>
   );
 }
