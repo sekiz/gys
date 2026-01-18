@@ -9,7 +9,7 @@ async function main() {
 
   // Admin kullanıcı oluştur
   const hashedPassword = await bcrypt.hash('admin123', 10);
-  
+
   const admin = await prisma.user.upsert({
     where: { email: 'admin@uzmangys.com' },
     update: {},
@@ -27,7 +27,7 @@ async function main() {
 
   // Test kullanıcısı oluştur
   const testUserPassword = await bcrypt.hash('test123', 10);
-  
+
   const testUser = await prisma.user.upsert({
     where: { email: 'test@uzmangys.com' },
     update: {},
@@ -52,6 +52,9 @@ async function main() {
       description: 'Zabıt Katibi, İcra Katibi ve diğer pozisyonlar için görevde yükselme sınavı',
       code: 'adalet-gys',
       isActive: true,
+      price: 750.00,
+      category: 'Adalet Bakanlığı',
+      institution: 'Adalet Bakanlığı',
     },
   });
 
@@ -64,30 +67,45 @@ async function main() {
       description: 'Unvan değişikliği sınavlarına yönelik kapsamlı hazırlık ve soru bankası',
       code: 'adalet-unvan',
       isActive: true,
+      price: 650.00,
+      category: 'Adalet Bakanlığı',
+      institution: 'Adalet Bakanlığı',
     },
     {
       name: 'İcra Müdür Yardımcılığı Sınavı',
       description: 'İcra Müdür Yardımcılığı pozisyonu için özel hazırlanmış soru bankası ve eğitim materyalleri',
       code: 'icra-mudur',
       isActive: true,
+      price: 950.00,
+      category: 'Adalet Bakanlığı',
+      institution: 'Adalet Bakanlığı',
     },
     {
       name: 'Komiser Yardımcılığı Sınavı',
       description: 'Emniyet Teşkilatı Komiser Yardımcılığı sınavına yönelik detaylı hazırlık programı',
       code: 'komiser',
       isActive: true,
+      price: 800.00,
+      category: 'Emniyet Genel Müdürlüğü',
+      institution: 'Emniyet Genel Müdürlüğü',
     },
     {
       name: 'Tapu Kadastro Görevde Yükselme',
       description: 'Tapu ve Kadastro Genel Müdürlüğü görevde yükselme sınavı için özel hazırlık',
       code: 'tapu',
       isActive: true,
+      price: 700.00,
+      category: 'Tapu ve Kadastro',
+      institution: 'Tapu ve Kadastro GM',
     },
     {
       name: 'Gençlik ve Spor Bakanlığı GYS',
       description: 'Gençlik ve Spor Bakanlığı personeli için görevde yükselme sınavı hazırlık platformu',
       code: 'genclik-spor',
       isActive: true,
+      price: 600.00,
+      category: 'Gençlik ve Spor',
+      institution: 'Gençlik ve Spor Bakanlığı',
     },
   ];
 
